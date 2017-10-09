@@ -238,9 +238,9 @@ class BaseLabelPropagation(six.with_metaclass(ABCMeta, BaseEstimator,
 
         alpha = self.alpha
         if self._variant == 'spreading' and \
-                (alpha is None or alpha <= 0.0 or alpha >= 1.0):
+                (alpha is None or alpha < 0.0 or alpha > 1.0):
             raise ValueError('alpha=%s is invalid: it must be inside '
-                             'the open interval (0, 1)' % alpha)
+                             'the closed interval [0, 1]' % alpha)
         y = np.asarray(y)
         unlabeled = y == -1
 
